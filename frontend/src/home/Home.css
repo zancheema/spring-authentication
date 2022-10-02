@@ -1,0 +1,14 @@
+.Avatar {
+    height: 300px;
+    width: 300px;
+    border-radius: 200px;
+}
+
+.Logout-button {
+    background-color: red;
+    color: white;
+}
+
+.Logout-button:hover {
+    background-color: rgb(172, 0, 0);
+}

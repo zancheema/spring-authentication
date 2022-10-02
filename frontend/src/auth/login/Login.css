@@ -1,0 +1,19 @@
+a {
+    text-decoration: none;
+}
+
+.Login-heading {
+    margin-bottom: 0;
+}
+
+.Login {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.Login-form {
+    height: 400px;
+    width: 400px;
+    padding: 16px;
+}
