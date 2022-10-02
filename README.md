@@ -1,15 +1,33 @@
 # Spring Boot OAuth2 Authentication (Password, Google, Github)
 
+## Content
+- [Live Demo](#watch-live-demo)
+- [Design](#design)
+    - [Technologies](#technologies)
+    - [Overview](#overview)
+        - [Email and Password Authentication](#email-and-password-authentication)
+        - [Oauth2 Authentication](#oauth2-authentication)
+    - [Processes](#processes)
+        - [Sign Up](#signup)
+            - [Case 1: Pass](#case-1-pass)
+            - [Case 2: Fail](#case-2-fail)
+        - [Login](#login)
+            - [Login using Email and Password](#login-using-email-and-password)
+            - [Login with OAuth2 Provider](#login-with-oauth2-provider)
+
+            
+
+[Live Demo](#watch-live-demo)
+
 ## Watch Live Demo
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=ihgYCY-aW1I
 " target="_blank"><img src="http://img.youtube.com/vi/ihgYCY-aW1I/0.jpg" 
 alt="Spring Booot OAuth2 | Live Demo" border="10" /></a>
 <p>Click to watch youtube video 👆</p>
 
-## Design Overview
+## Design
 ![Cover](https://github.com/zancheema/spring-authentication/blob/main/assets/design-doc-cover.gif "Cover")
 
-### Introduction
 <p>
     This is the Design Document for Authentication Client created using
     Spring Boot Backend and React Frontend.
@@ -19,7 +37,7 @@ alt="Spring Booot OAuth2 | Live Demo" border="10" /></a>
     for a user. So that only the authenticated user can access protected resource.
 </p>
 
-#### Technologies
+### Technologies
 <ul>
   <li>Backend
     <ul>
@@ -38,7 +56,7 @@ alt="Spring Booot OAuth2 | Live Demo" border="10" /></a>
   <li>Json Web Token - Communication between Server and Client</li>
 </ul>
 
-#### Overview
+### Overview
 <p>The application features a protected resource, which is equivalent to any the dashboard of other
     pages in a web application, which only authenticated user can view.</p>
 <p>Two types of authentications are implemented:</p>
@@ -48,19 +66,19 @@ alt="Spring Booot OAuth2 | Live Demo" border="10" /></a>
     <li>Oauth2 authentication with Github or Google</li>
 </ul>
 
-##### Email and Password Authentication
+#### Email and Password Authentication
 <p>This type of authentication is two step process. First the user has to authorize the
 credentials in the application's datastore. After that, the user can login with the provided
 email and password.</p>
             
-##### Oauth2 Authentication
+#### Oauth2 Authentication
 <p>This is a single step authentication process. For this application, the user can authentication
 withGithub and Google, but further third party authentication providers can be added. The user just has 
 to login with their account without any signup and the rest is handled by the Oauth2authentication 
 provider.</p>
 
-#### Processes
-##### Signup
+### Processes
+#### Signup
 <p>The new user Signup's with three credentials, namely:</p>
 <ul>
     <li>Fullname</li>
@@ -79,7 +97,7 @@ provider.</p>
 ![signup-conditional.svg](/assets/login-conditional.svg "SignUp Conditional")
 <p>Depending on the provided signup credentials, the request can either Pass or Fail:</p>
 
-###### Case 1: Pass
+##### Case 1: Pass
 <p>
   The provided Email is not already registed, in which case a new user record is created in the 
   Datastore and the signup request is successful returning a <strong>200 OK</strong> status code.
@@ -87,7 +105,7 @@ provider.</p>
 
 ![signup-pass.svg](/assets/signup-pass.svg "SignUp Pass")
 
-###### Case 2: Fail
+##### Case 2: Fail
 <p>
   The provided Email is already registered. This condition applies if any Oauth2 signed in accout 
   (Github or Google) provided the same email. It results in unsuccessful Signup request returning 
@@ -98,14 +116,14 @@ provider.</p>
 
 <p>That's it for Signup.</p>
 
-##### Login
+#### Login
 <p>Login validates the user credentails and returns a token, which is stored by the client and is
 used later to authenticate for access the protected resource. Login may pass or fail depending
 on the user credentials. In case of failure, server returns status code <strong>403
 Unauthorized</strong>, whereas status code <strong>200 OK</strong> is returned along with
 the token if the login is successful.</p>
 
-###### Login using Email and Password
+##### Login using Email and Password
 
 ![login-conditional.svg](assets/login-conditional.svg "Login Conditional")
 <ol>
@@ -117,7 +135,7 @@ the token if the login is successful.</p>
     and sent further requests to access the protected resource(s).</li>
 </ol>
 
-###### Login with OAuth2 Provider
+##### Login with OAuth2 Provider
 <p>In this type of Authentication, the validation is handled by OAuth2 provider, Google and
 Github API in this case. The provider authenticates the user and provides the authenticated
 user's credentials. These are used by the server to create and return the token.</p>
